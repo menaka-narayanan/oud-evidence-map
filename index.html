@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>OUD Policy Evidence Map</title>
+<meta name="description" content="An interactive map of peer-reviewed studies of opioid use disorder policy, by policy type, outcome, study design and population.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <h1 id="siteTitle">OUD Policy Evidence Map</h1>
+      <p id="siteIntro"></p>
+    </div>
+    <div class="source"><span class="chip-src"><span class="dot" id="srcDot"></span><span id="srcLabel">Loading data…</span></span></div>
+  </header>
+
+  <div class="layout">
+    <details class="rail-wrap" id="railWrap" open>
+      <summary><span>Filters</span><span id="railCount" class="n"></span></summary>
+      <aside class="rail" aria-label="Filters">
+        <div class="search facet"><h3><label for="q">Search</label></h3><input id="q" type="search" placeholder="Title, finding, policy, journal"></div>
+        <div class="facet years"><h3>Publication year</h3>
+          <div class="range"><select id="yFrom" aria-label="From year"></select><span>to</span><select id="yTo" aria-label="To year"></select></div></div>
+        <div id="facets" class="rail"></div>
+      </aside>
+    </details>
+
+    <main class="main">
+      <div class="active" id="active"></div>
+      <div class="panel">
+        <div class="viewbar">
+          <div class="views" role="tablist" aria-label="View">
+            <button role="tab" id="tabMap" aria-selected="true" aria-controls="viewMap">Evidence map</button>
+            <button role="tab" id="tabFig" aria-selected="false" aria-controls="viewFig">Summary figures</button>
+          </div>
+          <div class="seg" role="group" aria-label="Map cells show" id="modeSeg">
+            <button id="mCount" aria-pressed="true">Study count</button>
+            <button id="mMix" aria-pressed="false">Design mix</button>
+          </div>
+        </div>
+
+        <section id="viewMap" role="tabpanel" aria-labelledby="tabMap">
+          <div class="map-head"><h2 id="mapTitle">Policy × outcome</h2><p class="sub" id="mapSub"></p></div>
+          <div class="legend" id="legend"></div>
+          <div class="scroller"><table class="gm" id="gm"></table></div>
+        </section>
+
+        <section id="viewFig" role="tabpanel" aria-labelledby="tabFig" hidden>
+          <div class="map-head"><h2 id="figTitle">Summary</h2><p class="sub" id="figSub"></p></div>
+          <div class="figs" id="figs"></div>
+        </section>
+      </div>
+
+      <div class="panel" id="results">
+        <div class="res-head">
+          <h2 id="resTitle">Studies</h2>
+          <div class="res-tools">
+            <select id="sort" aria-label="Sort studies"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="size">Largest sample</option><option value="rigor">Design rigor</option><option value="title">Title A–Z</option></select>
+            <button class="btn" id="exportBtn">Download CSV</button>
+          </div>
+        </div>
+        <div class="mixbar" id="resMix" aria-hidden="true"></div>
+        <ol class="studies" id="list"></ol>
+        <div class="res-foot" id="resFoot"></div>
+      </div>
+    </main>
+  </div>
+  <footer class="foot" id="foot"></footer>
+</div>
+<div class="tip" id="tip" hidden></div>
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-modal="true" role="dialog" aria-labelledby="dTitle"></aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
